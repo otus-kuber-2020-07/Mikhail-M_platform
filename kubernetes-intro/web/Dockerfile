@@ -1,7 +1,18 @@
 FROM nginx:latest
 ARG nginx_uid=1001
-ARG nginx_gid=33
-RUN usermod -u ${nginx_uid} -o nginx && groupmod -g ${nginx_gid} -o nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+ARG nginx_port=8000
+
+RUN groupadd -g ${nginx_uid} appuser && \
+  useradd -r -u ${nginx_uid} -g appuser appuser && \
+  mkdir -p /opt/nginx/ && \
+  chown -R appuser:appuser /opt/nginx && \
+  mkdir -p /var/cache/nginx && \
+  chown -R appuser:appuser /var/cache/nginx && \
+  mkdir -p /etc/nginx/ && \
+  chown -R appuser:appuser /etc/nginx/
+
+COPY --chown=appuser:appuser nginx.conf /etc/nginx/nginx.conf
+USER appuser
 WORKDIR /app
-USER ${UID}
+EXPOSE ${nginx_port}
+CMD ["nginx", "-g", "daemon off;"]
