@@ -9,7 +9,9 @@ RUN groupadd -g ${nginx_uid} appuser && \
   mkdir -p /var/cache/nginx && \
   chown -R appuser:appuser /var/cache/nginx && \
   mkdir -p /etc/nginx/ && \
-  chown -R appuser:appuser /etc/nginx/
+  chown -R appuser:appuser /etc/nginx/ && \
+  mkdir -p /app && \
+  chown -R appuser:appuser /app
 
 COPY --chown=appuser:appuser nginx.conf /etc/nginx/nginx.conf
 USER appuser
