@@ -9,6 +9,13 @@ spec: # Описание Pod
   - name: nginx 
     image: mikhailmar/kuberintro_nginx:1.2
     imagePullPolicy: Always
+    readinessProbe:
+      httpGet:
+        path: /index.html
+        port: 8000
+    livenessProbe:
+      tcpSocket:
+        port: 8000
     volumeMounts:
     - name: app
       mountPath: /app
@@ -22,5 +29,6 @@ spec: # Описание Pod
     volumeMounts:
     - name: app
       mountPath: /app
-    command: ['sh', '-c', 'wget -O- https://tinyurl.com/otus-k8s-intro | sh']
+
+    command: ['sh', '-c', 'wget -O- https://raw.githubusercontent.com/express42/otus-platform-snippets/master/Module-02/Introduction-to-Kubernetes/wget.sh | sh']
 
