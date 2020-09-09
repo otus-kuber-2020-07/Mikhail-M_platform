@@ -69,4 +69,10 @@ helm upgrade --install chartmuseum stable/chartmuseum --wait \
  ~~~
  - пошаблонизировал фронт и поиграл с этим, добавил его в зависимости к hipster-shop
  - [todo] установить redis
+ - [todo] работа с секретами в helm
  
+ - установил плагин для пуша и запушил
+ ~~~
+ helm plugin install https://github.com/chartmuseum/helm-push.git
+ sh repo.sh
+ ~~~
