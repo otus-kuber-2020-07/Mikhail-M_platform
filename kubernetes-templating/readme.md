@@ -58,3 +58,15 @@ helm upgrade --install chartmuseum stable/chartmuseum --wait \
  cd kubernetes-templating/helmfile
  helmfile sync
  ~~~
+ 
+ - запустил hipster-shop, через kube-forwarder пробросил порты и посмотрел фронт
+ ~~~
+  helm upgrade --install hipster-shop kubernetes-templating/hipster-shop --namespace hipster-shop
+ ~~~
+ - вынес фронт из hipster-shop, добился того, что он поднялся
+ ~~~
+ helm upgrade --install frontend kubernetes-templating/frontend --namespace hipster-shop
+ ~~~
+ - пошаблонизировал фронт и поиграл с этим, добавил его в зависимости к hipster-shop
+ - [todo] установить redis
+ 
