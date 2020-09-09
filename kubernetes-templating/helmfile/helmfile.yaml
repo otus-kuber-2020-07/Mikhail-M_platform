@@ -24,12 +24,9 @@ releases:
   version: 0.16.1
   namespace: cert-manager
   wait: true
-  #atomic: true
-  #cleanupOnFail: true
-  #force: true
-  #set:
-  #- name: installCRDs
-  #  value: true
+  set:
+    - name: installCRDs
+      value: true
 
 - name: cert-manager-issuers
   needs:

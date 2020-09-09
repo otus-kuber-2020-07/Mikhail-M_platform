@@ -56,8 +56,5 @@ helm upgrade --install chartmuseum stable/chartmuseum --wait \
  ~~~
  helm plugin install https://github.com/databus23/helm-diff # - а то не работало
  cd kubernetes-templating/helmfile
- helmfile apply
-
- 
-
+ helmfile sync
  ~~~
