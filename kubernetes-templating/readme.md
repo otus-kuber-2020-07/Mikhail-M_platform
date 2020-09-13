@@ -76,3 +76,9 @@ helm upgrade --install chartmuseum stable/chartmuseum --wait \
  helm plugin install https://github.com/chartmuseum/helm-push.git
  sh repo.sh
  ~~~
+ 
+ -- задеплоил paymentservice и shippingservice через kubecfg
+ 
+ ~~~
+ kubecfg update services.jsonnet --namespace hipster-shop
+ ~~~
