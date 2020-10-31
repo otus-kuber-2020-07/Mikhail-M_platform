@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: app
+        image: nginx
+        ports:
+          - name: nginx
+            containerPort: 80
+        volumeMounts:
+          - name: config
+            mountPath: /etc/nginx/conf.d
+      - name: nginx-exporter
+        image: nginx/nginx-prometheus-exporter
+        args: ['-nginx.scrape-uri', 'http://localhost:80/basic_status']
+        ports:
+          - name: metrics
+            containerPort: 9113
+      volumes:
+        - name: config
+          configMap:
+            name: config-nginx
+
