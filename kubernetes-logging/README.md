@@ -110,4 +110,18 @@ helm upgrade --install fluent-bit stable/fluent-bit --namespace observability -f
 ~~~
 helm upgrade --install elasticsearch-exporter stable/elasticsearch-exporter --set es.uri=http://elasticsearch-master:9200 --set serviceMonitor.enabled=true --namespace=observability
 ~~~
-- импортировал https://grafana.com/grafana/dashboards/4358
+- импортировал https://grafana.com/grafana/dashboards/4358 и поиграл, посмотрел -- круто
+
+- поиграл с этим алертом, пока не разобрался как заставить прометеус принять это как правило, просто исполнял запрос в админке и ронял-поднимал ноды
+~~~
+ALERT ElasticsearchTooFewNodesRunning
+ IF elasticsearch_cluster_health_number_of_nodes < 3
+ FOR 5m
+ LABELS {severity="critical"}
+ ANNOTATIONS {description="There are only {{$value}} < 3 ElasticSearch nodes
+running", summary="ElasticSearch running on less than 3 nodes"}
+~~~
+
+- поиграл с кибаной и экспортировал дашборду
+
+<img src="./imgs/kibana.png" alt="kibana"/>

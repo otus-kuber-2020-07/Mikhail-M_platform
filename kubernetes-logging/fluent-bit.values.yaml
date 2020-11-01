@@ -4,6 +4,9 @@ tolerations:
     value: infra
     effect: NoSchedule
 
+nodeSelector:
+  cloud.google.com/gke-nodepool: infra-pool
+
 backend:
   type: es
   es:

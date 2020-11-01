@@ -14,4 +14,4 @@ ingress:
   }
   path: /
   hosts:
-  - kibana.35.225.44.17.xip.io
+  - kibana.34.68.11.248.xip.io
